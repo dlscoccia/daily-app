@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders homepage unchanged 1`] = `
+<div>
+  <h2
+    class="aja"
+  >
+    Aja
+  </h2>
+</div>
+`;
