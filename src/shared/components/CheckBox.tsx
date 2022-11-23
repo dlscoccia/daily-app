@@ -6,13 +6,13 @@ interface Props {
   [newProp: string]: any
 }
 
-export const Checkbox = ({ label, ...props }: Props) => {
+export const CheckBox = ({ label, ...props }: Props) => {
   const [field, meta] = useField({ ...props, type: 'checkbox' })
 
   return (
     <>
-      <label>
-        <input type="checkbox" {...field} {...props} />
+      <label className="mt-3 flex items-center">
+        <input type="checkbox" {...field} {...props} className="mr-3" />
         {label}
       </label>
 

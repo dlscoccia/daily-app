@@ -1,4 +1,4 @@
-import { Checkbox } from '@/shared/components/CheckBox'
+import { CheckBox } from '@/shared/components/CheckBox'
 import { Select } from '@/shared/components/Select'
 import { TextInput } from '@/shared/components/TextInput'
 import { Formik, Form } from 'formik'
@@ -6,9 +6,7 @@ import * as Yup from 'yup'
 
 export const Login = () => {
   return (
-    <div className="min-h-screen w-100 bg-blue-300 flex  flex-col justify-center items-center">
-      <h1>Login</h1>
-
+    <div className="min-h-screen flex flex-col w-100 h- justify-center items-center bg-blue-800">
       <Formik
         initialValues={{
           firstName: '',
@@ -22,52 +20,55 @@ export const Login = () => {
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
-            .max(15, 'Must have less than 15 chars')
-            .required('Name required'),
+            .max(15, 'Debe de tener 15 caracteres o menos')
+            .required('Requerido'),
           lastName: Yup.string()
-            .max(15, 'Must have less than 15 chars')
-            .required('Name required'),
+            .max(15, 'Debe de tener 15 caracteres o menos')
+            .required('Requerido'),
           email: Yup.string()
-            .email('email must be valid')
-            .required('email is required'),
-          terms: Yup.boolean().oneOf([true], 'You must accept terms'),
+            .email('El correo no tiene un formato válido')
+            .required('Requerido'),
+          terms: Yup.boolean().oneOf([true], 'Debe de aceptar las condiciones'),
           jobType: Yup.string()
-            .required('Required')
-            .notOneOf(['it-junior'], 'Not valid'),
+            .notOneOf(['it-jr'], 'Esta opción no es permitida.')
+            .required('Requerido'),
         })}
       >
         {() => (
-          <Form>
+          <Form className="bg-gray-100 p-4 rounded-md">
+            <h1 className="text-center p-2 text-lg font-bold text-blue-800">
+              Login
+            </h1>
             <TextInput
-              label="Firts Name"
+              label="First Name"
               name="firstName"
-              placeholder="Name"
-              type="text"
+              placeholder="Fernando"
             />
+
             <TextInput
               label="Last Name"
               name="lastName"
-              placeholder="Last Name"
-              type="text"
+              placeholder="Herrera"
             />
+
             <TextInput
-              label="Email"
+              label="Email Address"
               name="email"
-              placeholder="Email"
+              placeholder="jonh@google.com"
               type="email"
             />
 
             <Select label="Job Type" name="jobType">
               <option value="">Pick something</option>
-              <option value="developer">Developer</option>
+              <option value="developer">Develper</option>
               <option value="designer">Designer</option>
               <option value="it-senior">IT Senior</option>
-              <option value="it-junior">IT Junior</option>
+              <option value="it-jr">IT Jr.</option>
             </Select>
 
-            <Checkbox label={'Terms & conditions'} name={'terms'} />
+            <CheckBox label="Termns & Conditions" name="terms" />
 
-            <button type="submit" className="bg-blue-700">
+            <button type="submit" className="bg-gray-600 text-white rounded-md">
               Submit
             </button>
           </Form>

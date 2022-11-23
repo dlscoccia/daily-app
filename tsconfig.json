@@ -16,7 +16,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/shared/components/*": ["src/shared/components/*"]
+      "@/shared/components/*": ["src/shared/components/*"],
+      "@/content/components/*": ["src/content/components/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
