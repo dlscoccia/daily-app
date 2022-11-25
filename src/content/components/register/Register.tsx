@@ -1,10 +1,46 @@
-import { TextInput } from '@/shared/components/TextInput'
-import { Form, Formik } from 'formik'
-import * as Yup from 'yup'
+// import { client } from '@/core/api/axios'
+import { FormBuilder } from '@/shared/components/FormBuilder'
+import Swal from 'sweetalert2'
+import { registerForm } from '../../../core/api/form'
 
 export const Register = () => {
+  const onSubmitRegister = async (values: any) => {
+    const resp = await fetch('http://localhost:4000/register', {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(values), // data can be `string` or {object}!
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const data = await resp.json()
+    if (!resp.ok) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: data.msg,
+      })
+    }
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'User created',
+      // showConfirmButton: false,
+      // timer: 1500,
+    })
+  }
+
   return (
-    <div className="min-h-screen w-100 flex flex-col bg-blue-800 items-center justify-center">
+    <FormBuilder
+      heading={'Register'}
+      data={registerForm}
+      submit={onSubmitRegister}
+    />
+  )
+}
+{
+  /* <div className="min-h-screen w-100 flex flex-col bg-blue-800 items-center justify-center">
       <Formik
         initialValues={{
           name: '',
@@ -72,6 +108,5 @@ export const Register = () => {
           </Form>
         )}
       </Formik>
-    </div>
-  )
+    </div> */
 }

@@ -1,4 +1,4 @@
-import { FormDynamic } from '@/shared/components/FormDynamic'
+import { FormDynamic } from '@/shared/components/FormBuilder'
 
 const Form = () => <FormDynamic />
 

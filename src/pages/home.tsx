@@ -1,7 +1,5 @@
-import React from 'react'
+import Home from '@/content/components/Home/Home'
 
-const home = () => {
-  return <div>home</div>
-}
+const home = () => <Home />
 
 export default home

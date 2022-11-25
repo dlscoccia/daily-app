@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Test from '../content/components/Test'
 import styles from '../styles/Home.module.css'
 import variables from '../styles/variables.module.scss'
 
@@ -18,7 +17,6 @@ export default function Home() {
       >
         Hello world!
       </h1>
-      <Test />
     </div>
   )
 }

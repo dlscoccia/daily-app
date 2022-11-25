@@ -1,12 +1,49 @@
-import { CheckBox } from '@/shared/components/CheckBox'
-import { Select } from '@/shared/components/Select'
-import { TextInput } from '@/shared/components/TextInput'
-import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
+import { FormBuilder } from '@/shared/components/FormBuilder'
+import { loginForm } from '@/core/api/form'
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { onLogin } from '@/core/store'
 
 export const Login = () => {
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const onSubmitLogin = async (values: any) => {
+    console.log(values)
+    const resp = await fetch('http://localhost:4000/login', {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const data = await resp.json()
+    if (!resp.ok) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: data.msg,
+      })
+    }
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Login Success',
+      showConfirmButton: false,
+      timer: 2000,
+    })
+    const { user, token } = data
+    dispatch(onLogin({ ...user, token }))
+    router.push('/home')
+  }
+
   return (
-    <div className="min-h-screen flex flex-col w-100 h- justify-center items-center bg-blue-800">
+    <FormBuilder heading={'Login'} data={loginForm} submit={onSubmitLogin} />
+  )
+}
+/*     <div className="min-h-screen flex flex-col w-100 h- justify-center items-center bg-blue-800">
       <Formik
         initialValues={{
           firstName: '',
@@ -76,4 +113,4 @@ export const Login = () => {
       </Formik>
     </div>
   )
-}
+} */

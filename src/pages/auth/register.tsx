@@ -1,4 +1,4 @@
-import { Register } from '@/content/components/register'
+import { Register } from '@/content/components/Register'
 
 const login = () => <Register />
 
